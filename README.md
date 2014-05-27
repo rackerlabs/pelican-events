@@ -30,7 +30,7 @@ EVENT_EXCLUDES=''
 
 
 To create an event you will create a JSON file with a filename suffix of
-'.events' in this directory. It will need to have a minimum set of fields in
+'.event' in this directory. It will need to have a minimum set of fields in
 order to meet the basic criteria, as seen in `contents.py`.
 
 
