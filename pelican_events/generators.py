@@ -7,7 +7,7 @@ from pelican.contents import is_valid_content
 from pelican.utils import process_translations
 from pelican import signals
 from pelican.generators import CachingGenerator
-
+import time
 from .contents import Event
 from .signals import *
 
@@ -42,7 +42,7 @@ class EventsGenerator(CachingGenerator):
         """
         This will report to stdout the number of events and hidden events processed.
         """
-        print( "Process {0} events and {1} hidden events".format( len(self.events), len(self.hidden_events) ) )
+        print( "Events: {0} published and {1} hidden in {2:0.2f} seconds".format( len(self.events), len(self.hidden_events), self.elapsed ) )
 
     def generate_context(self):
         """
@@ -105,6 +105,7 @@ class EventsGenerator(CachingGenerator):
         """
         Here we generate the HTML page form the event(s).
         """
+        start = time.time()
         for event in chain(self.translations, self.events,
                           self.hidden_translations, self.hidden_events):
             writer.write_file(
@@ -112,5 +113,6 @@ class EventsGenerator(CachingGenerator):
                 self.context, event=event,
                 relative_urls=self.settings['RELATIVE_URLS'],
                 override_output=hasattr(event, 'override_save_as'))
-
+        self.elapsed = time.time() - start
+        self.generate_report()
 
