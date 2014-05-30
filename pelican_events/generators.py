@@ -9,6 +9,7 @@ from pelican import signals
 from pelican.generators import CachingGenerator
 
 from .contents import Event
+from .signals import *
 
 logger = logging.getLogger(__name__)
 
@@ -19,12 +20,6 @@ logger = logging.getLogger(__name__)
 # are hazy at best. It appears you simply define them here and use them in the
 # code below. YMMV.
 
-
-from blinker import signal
-event_generator_init = signal('event_generator_init')
-event_generator_finalized = signal('event_generator_finalized')
-event_generator_preread = signal('event_generator_preread')
-event_generator_context = signal('event_generator_context')
 
 class EventsGenerator(CachingGenerator):
     """

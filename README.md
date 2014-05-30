@@ -39,7 +39,7 @@ order to meet the basic criteria, as seen in `contents.py`.
 With these bits in place you can now use the template engine to generate
 per-event pages. The default template is `event.html`. Coming soon will be an
 `events.html` option to specify a template for generating a list of all events
-- much the same as is done with blog posts.
+-- much the same as is done with blog posts.
 
 Included in the plugin is a `templates` directory with a sample `event.html`
 template. It is very minimal showing just the basic details of the event. It is

@@ -11,7 +11,7 @@ except ImportError:
 
 import six
 import hashlib
-from pelican import signals
+from pelican import signals as core_signals
 import os
 
 from pelican.generators import Generator
@@ -20,11 +20,8 @@ from pelican import settings
 
 from pelican.utils import pelican_open
 
-from blinker import signal
-event_generator_init = signal('event_generator_init')
-event_generator_finalized = signal('event_generator_finalized')
-
 from .generators import EventsGenerator
+from .signals import *
 
 class EventReader(readers.BaseReader):
 	enabled = bool(json)
@@ -52,6 +49,6 @@ def get_generators(generators):
 	return EventsGenerator
 
 def register():
-	signals.readers_init.connect(add_reader)
-	signals.get_generators.connect(get_generators)
+	core_signals.readers_init.connect(add_reader)
+	core_signals.get_generators.connect(get_generators)
 
